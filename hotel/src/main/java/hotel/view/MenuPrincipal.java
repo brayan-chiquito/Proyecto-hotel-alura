@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import hotel.factory.ConenectionFactory;
+import hotel.factory.ConnectionFactory;
 
 import java.awt.Panel;
 import java.awt.Color;
@@ -21,7 +21,8 @@ import java.awt.event.MouseMotionAdapter;
 
 @SuppressWarnings("serial")
 public class MenuPrincipal extends JFrame {
-	ConenectionFactory connectionFactory = ConenectionFactory.getInstance();
+	ConnectionFactory connectionFactory = ConnectionFactory.getInstance();
+	
 	private JPanel contentPane;
 	private JLabel labelExit;
 	int xMouse, yMouse;

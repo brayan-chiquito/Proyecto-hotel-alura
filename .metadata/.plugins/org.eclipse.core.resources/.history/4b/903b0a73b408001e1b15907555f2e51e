@@ -1,0 +1,26 @@
+package hotel.controller;
+
+import hotel.dao.ReservaDao;
+import hotel.factory.ConnectionFactory;
+import hotel.modelo.Reserva;
+
+public class ReservaController {
+	private ReservaDao reservaDao;
+	
+	
+	public ReservaController() {
+		
+	}
+	public void guardar(Reserva reserva) {
+		
+	}
+	public void listar() {
+		
+	}
+	public void modificar() {
+		
+	}
+	public void eliminar() {
+		
+	}
+}

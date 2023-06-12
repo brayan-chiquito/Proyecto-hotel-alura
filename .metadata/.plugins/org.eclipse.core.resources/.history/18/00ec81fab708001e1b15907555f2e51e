@@ -1,0 +1,17 @@
+package hotel.dao;
+
+import java.sql.Connection;
+
+import hotel.modelo.Reserva;
+
+public class ReservaDao {
+	private Connection con;
+
+	public ReservaDao(Connection con) {
+		this.con = con;
+	}
+	
+	public void guardar(Reserva reserva) {
+		
+	}
+}

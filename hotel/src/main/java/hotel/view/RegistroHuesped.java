@@ -247,12 +247,14 @@ public class RegistroHuesped extends JFrame {
 		separator_1_2_5.setForeground(new Color(12, 138, 199));
 		separator_1_2_5.setBackground(new Color(12, 138, 199));
 		contentPane.add(separator_1_2_5);
-		
+		//falta **************************************************************************************
 		JPanel btnguardar = new JPanel();
 		btnguardar.setBounds(723, 560, 122, 35);
 		btnguardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Exito exito = new Exito();
+				exito.setVisible(true);
 			}
 		});
 		btnguardar.setLayout(null);
@@ -266,6 +268,7 @@ public class RegistroHuesped extends JFrame {
 		labelGuardar.setFont(new Font("Roboto", Font.PLAIN, 18));
 		labelGuardar.setBounds(0, 0, 122, 35);
 		btnguardar.add(labelGuardar);
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 489, 634);

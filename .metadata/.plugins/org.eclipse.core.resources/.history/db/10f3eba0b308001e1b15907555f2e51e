@@ -1,0 +1,20 @@
+package hotel.controller;
+
+import hotel.modelo.Reserva;
+
+public class ReservaController {
+	
+	
+	public void guardar(Reserva reserva) {
+		
+	}
+	public void listar() {
+		
+	}
+	public void modificar() {
+		
+	}
+	public void eliminar() {
+		
+	}
+}
