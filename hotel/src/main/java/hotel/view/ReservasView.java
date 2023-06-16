@@ -339,12 +339,13 @@ public class ReservasView extends JFrame {
 
 	}
 	
+	public void ultimoRegistro() {
+		reservaController.ultimoResgistro();
+	}
+	
 	public void guardar() {
 		Date fechaEntrada = txtFechaEntrada.getDate();
 		Date fechaSalida = txtFechaSalida.getDate();
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		String fechaFormateadaEntrada = formato.format(fechaEntrada);
-		String fechaFormateadaSalida = formato.format(fechaSalida);
 		String formaPagoSeleccionada = (String) txtFormaPago.getSelectedItem();
 		var reserva = new Reserva(fechaEntrada,fechaSalida,valor,formaPagoSeleccionada);
 		System.out.println(reserva.getFechaEntrada());

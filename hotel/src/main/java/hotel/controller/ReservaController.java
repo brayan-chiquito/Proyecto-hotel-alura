@@ -24,4 +24,8 @@ public class ReservaController {
 	public void eliminar() {
 		
 	}
+	public int ultimoResgistro() {
+		return reservaDao.ultimoResgistro();
+		
+	}
 }
