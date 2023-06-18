@@ -1,5 +1,0 @@
-package hotel.jdbc.factory;
-
-public class ConenectionFactory {
-
-}

@@ -7,12 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import hotel.modelo.Huesped;
 import hotel.modelo.Reserva;
 
-public class ReservaDao {
+public class HuespedDao {
 	private Connection con;
 
-	public ReservaDao(Connection con) {
+	public HuespedDao(Connection con) {
 		this.con = con;
 	}
 	private void cerrarConexion() {
@@ -25,14 +26,14 @@ public class ReservaDao {
         }
     }
 	
-	public void guardar(Reserva reserva) {
+	public void guardar(Huesped huesped) {
 		try {
 			con.setAutoCommit(false);
-			PreparedStatement statement = con.prepareStatement("INSERT INTO RESERVAS (fechaEntrada, fechaSalida, valor, formaPago)"
-			+ "VALUE (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement statement = con.prepareStatement("INSERT INTO HUESPEDES (nombre, apellido, fechaNacimiento, nacionalidad, telefono, idReserva)"
+			+ "VALUE (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			
 			try(statement) {
-				ejecutarRejistro(reserva, statement);
+				ejecutarRejistro(huesped, statement);
 				con.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -46,22 +47,22 @@ public class ReservaDao {
 		}
 	}
 
-	private void ejecutarRejistro(Reserva reserva, PreparedStatement statement) throws SQLException {
-		java.util.Date fechaEntrada = reserva.getFechaEntrada();
-		java.util.Date fechaSalida = reserva.getFechaSalida();
-		java.sql.Date fechaSqlEntrada = new java.sql.Date(fechaEntrada.getTime());
-		java.sql.Date fechaSqlSalida = new java.sql.Date(fechaSalida.getTime());
+	private void ejecutarRejistro(Huesped huesped, PreparedStatement statement) throws SQLException {
+		java.util.Date fechaNacimineto = huesped.getFechaNacimiento();
+		java.sql.Date fechaSqlNacimineto = new java.sql.Date(fechaNacimineto.getTime());
 		
-		statement.setDate(1, fechaSqlEntrada);
-		statement.setDate(2, fechaSqlSalida);
-		statement.setInt(3, reserva.getValor());
-		statement.setString(4, reserva.getFormaPago());
+		statement.setString(1, huesped.getNombre());
+		statement.setString(2, huesped.getApellido());
+		statement.setDate(3, fechaSqlNacimineto);
+		statement.setString(4, huesped.getNacionalidad());
+		statement.setString(5, huesped.getTelefono());
+		statement.setInt(6, huesped.getCodigoReserva());
 		statement.execute();
 		final ResultSet resultSet = statement.getGeneratedKeys();
     	try(resultSet){
 	    	while(resultSet.next()) {
-	    		reserva.setId(resultSet.getInt(1));
-	    		System.out.println(String.format("Fue insertado el producto %s", reserva));
+	    		huesped.setId(resultSet.getInt(1));
+	    		System.out.println(String.format("Fue insertado el producto %s", huesped));
 	    	}
     	}
 	}
@@ -82,6 +83,7 @@ public class ReservaDao {
 				        
 				    } else {
 				        resultado = 0;
+				        System.out.println(resultado);
 				    }
 				}
 			}

@@ -9,8 +9,6 @@
     <fullyQualifiedTypeName name="hotel.factory.ConenectionFactory"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="hotel.factory.ConnectionFactory"/>
-    <fullyQualifiedTypeName name="hotel.dao.ReservaDao"/>
-    <fullyQualifiedTypeName name="hotel.modelo.Reserva"/>
     <fullyQualifiedTypeName name="com.mysql.cj.xdevapi.PreparableStatement"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="java.sql.Statement"/>
@@ -26,4 +24,7 @@
     <fullyQualifiedTypeName name="hotel.modelo.Huesped"/>
     <fullyQualifiedTypeName name="hotel.controller.HuespedController"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="hotel.view.ReservasView"/>
+    <fullyQualifiedTypeName name="hotel.dao.ReservaDao"/>
+    <fullyQualifiedTypeName name="hotel.modelo.Reserva"/>
 </qualifiedTypeNameHistroy>

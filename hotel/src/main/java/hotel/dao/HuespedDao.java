@@ -67,29 +67,4 @@ public class HuespedDao {
     	}
 	}
 	
-	public int ultimoResgistro() {
-		Integer resultado;
-		try {
-			var querySelect = "SELECT * FROM RESERVAS ORDER BY ID DESC LIMIT 1";
-			System.out.println(querySelect);
-			final PreparedStatement statement = con.prepareStatement(
-					querySelect);
-			try(statement){
-				final ResultSet resultSet = statement.executeQuery();
-				try(resultSet){
-					
-					if (resultSet.next()) {
-						resultado = resultSet.getInt("ID");
-				        
-				    } else {
-				        resultado = 1;
-				    }
-				}
-			}
-			
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		return resultado;
-	}
 }

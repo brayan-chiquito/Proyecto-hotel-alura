@@ -268,7 +268,7 @@ public class RegistroHuesped extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(!txtNombre.getText().isBlank() && !txtApellido.getText().isBlank() && 
 						txtFechaN.getDate() != null && !txtTelefono.getText().isBlank()) {
-					guardar(reserva);
+					guardar();
 					Exito exito = new Exito();
 					exito.setVisible(true);
 				}
@@ -344,7 +344,7 @@ public class RegistroHuesped extends JFrame {
 		String nacionalidad = (String) txtNacionalidad.getSelectedItem();
 		Integer codigoReserva = Integer.parseInt(txtNreserva.getText());
 		var huesped = new Huesped(txtNombre.getText(), txtApellido.getText(), fechaNacimiento, nacionalidad, txtTelefono.getText(), codigoReserva);
-		huespedController.guardar(huesped, reserva);
+		huespedController.guardar(huesped);
 	}
 	
 	//Código que permite mover la ventana por la pantalla según la posición de "x" y "y"	

@@ -81,7 +81,7 @@ public class ReservaDao {
 						resultado = resultSet.getInt("ID");
 				        
 				    } else {
-				        resultado = 0;
+				        resultado = 1;
 				    }
 				}
 			}

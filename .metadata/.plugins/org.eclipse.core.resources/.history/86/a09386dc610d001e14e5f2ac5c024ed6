@@ -11,7 +11,6 @@ import com.toedter.calendar.JDateChooser;
 import hotel.controller.HuespedController;
 import hotel.controller.ReservaController;
 import hotel.modelo.Huesped;
-import hotel.modelo.Reserva;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -55,7 +54,7 @@ public class RegistroHuesped extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RegistroHuesped frame = new RegistroHuesped(null);
+					RegistroHuesped frame = new RegistroHuesped();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,7 +66,7 @@ public class RegistroHuesped extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegistroHuesped(Reserva reserva) {
+	public RegistroHuesped() {
 		this.reservaController = new ReservaController();
 		this.huespedController = new HuespedController();
 		
@@ -268,7 +267,7 @@ public class RegistroHuesped extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(!txtNombre.getText().isBlank() && !txtApellido.getText().isBlank() && 
 						txtFechaN.getDate() != null && !txtTelefono.getText().isBlank()) {
-					guardar(reserva);
+					guardar();
 					Exito exito = new Exito();
 					exito.setVisible(true);
 				}
@@ -338,13 +337,13 @@ public class RegistroHuesped extends JFrame {
 		labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
 	}
 	
-	public void guardar(Reserva reserva) {
+	public void guardar() {
 		
 		Date fechaNacimiento = txtFechaN.getDate();
 		String nacionalidad = (String) txtNacionalidad.getSelectedItem();
 		Integer codigoReserva = Integer.parseInt(txtNreserva.getText());
 		var huesped = new Huesped(txtNombre.getText(), txtApellido.getText(), fechaNacimiento, nacionalidad, txtTelefono.getText(), codigoReserva);
-		huespedController.guardar(huesped, reserva);
+		huespedController.guardar(huesped);
 	}
 	
 	//Código que permite mover la ventana por la pantalla según la posición de "x" y "y"	
