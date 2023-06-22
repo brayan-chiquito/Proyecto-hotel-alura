@@ -27,4 +27,5 @@
     <fullyQualifiedTypeName name="hotel.view.ReservasView"/>
     <fullyQualifiedTypeName name="hotel.dao.ReservaDao"/>
     <fullyQualifiedTypeName name="hotel.modelo.Reserva"/>
+    <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 </qualifiedTypeNameHistroy>
