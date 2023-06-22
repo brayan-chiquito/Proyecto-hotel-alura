@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import hotel.modelo.Huesped;
 import hotel.modelo.Reserva;
@@ -65,6 +67,34 @@ public class HuespedDao {
 	    		System.out.println(String.format("Fue insertado el producto %s", huesped));
 	    	}
     	}
+	}
+	public List<Huesped> listar() {
+		List<Huesped> resultado = new ArrayList<>();
+		
+		try{
+		
+			final PreparedStatement statement = con.prepareStatement("SELECT ID, NOMBRE, APELLIDO, FECHANACIMIENTO, NACIONALIDAD, TELEFONO, IDRESERVA FROM HUESPEDES");
+			
+			try(statement){
+				statement.execute();
+				
+				final ResultSet resultSet = statement.getResultSet();
+				
+				while(resultSet.next()) {
+					Huesped fila = new Huesped(resultSet.getInt("ID"),
+							resultSet.getString("NOMBRE"),
+							resultSet.getString("APELLIDO"),
+							resultSet.getDate("FECHANACIMIENTO"),
+							resultSet.getString("NACIONALIDAD"),
+							resultSet.getString("TELEFONO"),
+								resultSet.getInt("IDRESERVA"));
+					resultado.add(fila);
+				}
+				return resultado;
+			}
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 }

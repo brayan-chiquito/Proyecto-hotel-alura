@@ -1,30 +1,29 @@
 package hotel.view;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
 import java.awt.Color;
-import java.awt.SystemColor;
-import javax.swing.JLabel;
+import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.util.List;
-import java.awt.event.ActionEvent;
-import javax.swing.JTabbedPane;
 import java.awt.Toolkit;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import hotel.controller.HuespedController;
+import hotel.controller.ReservaController;
 
 @SuppressWarnings("serial")
 public class Busqueda extends JFrame {
@@ -37,6 +36,8 @@ public class Busqueda extends JFrame {
 	private DefaultTableModel modeloHuesped;
 	private JLabel labelAtras;
 	private JLabel labelExit;
+	private ReservaController reservaController;
+	private HuespedController huespedController;
 	int xMouse, yMouse;
 
 	/**
@@ -59,6 +60,8 @@ public class Busqueda extends JFrame {
 	 * Create the frame.
 	 */
 	public Busqueda() {
+		this.reservaController = new ReservaController();
+		this.huespedController = new HuespedController();
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Busqueda.class.getResource("/imagenes/lupa2.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 910, 571);
@@ -104,7 +107,7 @@ public class Busqueda extends JFrame {
 		JScrollPane scroll_table = new JScrollPane(tbReservas);
 		panel.addTab("Reservas", new ImageIcon(Busqueda.class.getResource("/imagenes/reservado.png")), scroll_table, null);
 		scroll_table.setVisible(true);
-		
+		cargarTablaReservas();
 		
 		tbHuespedes = new JTable();
 		tbHuespedes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -120,6 +123,7 @@ public class Busqueda extends JFrame {
 		JScrollPane scroll_tableHuespedes = new JScrollPane(tbHuespedes);
 		panel.addTab("Huéspedes", new ImageIcon(Busqueda.class.getResource("/imagenes/pessoas.png")), scroll_tableHuespedes, null);
 		scroll_tableHuespedes.setVisible(true);
+		cargarTablaHespedes();
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(Busqueda.class.getResource("/imagenes/Ha-100px.png")));
@@ -216,7 +220,7 @@ public class Busqueda extends JFrame {
 		btnbuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+				
 			}
 		});
 		btnbuscar.setLayout(null);
@@ -260,6 +264,32 @@ public class Busqueda extends JFrame {
 		lblEliminar.setBounds(0, 0, 122, 35);
 		btnEliminar.add(lblEliminar);
 		setResizable(false);
+	}
+	
+	public void cargarTablaReservas() {
+		var reservas = this.reservaController.listar();
+		reservas.forEach(reserva -> modelo.addRow(
+				new Object[] {
+					reserva.getId(),
+					reserva.getFechaEntrada(),
+					reserva.getFechaSalida(),
+					reserva.getValor(),
+					reserva.getFormaPago()
+				}));
+	}
+	
+	public void cargarTablaHespedes() {
+		var huespedes = this.huespedController.listar();
+		huespedes.forEach(huesped -> modeloHuesped.addRow(
+				new Object[] {
+					huesped.getId(),
+					huesped.getNombre(),
+					huesped.getApellido(),
+					huesped.getFechaNacimiento(),
+					huesped.getNacionalidad(),
+					huesped.getTelefono(),
+					huesped.getCodigoReserva()
+				}));
 	}
 	
 //Código que permite mover la ventana por la pantalla según la posición de "x" y "y"

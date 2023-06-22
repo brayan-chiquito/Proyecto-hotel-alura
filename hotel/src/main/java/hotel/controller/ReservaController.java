@@ -1,5 +1,7 @@
 package hotel.controller;
 
+import java.util.List;
+
 import hotel.dao.ReservaDao;
 import hotel.factory.ConnectionFactory;
 import hotel.modelo.Reserva;
@@ -15,8 +17,8 @@ public class ReservaController {
 	public void guardar(Reserva reserva) {
 		reservaDao.guardar(reserva);
 	}
-	public void listar() {
-		
+	public List<Reserva> listar() {
+		return reservaDao.listar();
 	}
 	public void modificar() {
 		

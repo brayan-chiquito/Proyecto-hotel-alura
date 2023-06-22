@@ -1,5 +1,7 @@
 package hotel.controller;
 
+import java.util.List;
+
 import hotel.dao.HuespedDao;
 import hotel.dao.ReservaDao;
 import hotel.factory.ConnectionFactory;
@@ -21,8 +23,8 @@ public class HuespedController {
 		reservaDao.guardar(reserva);
 		huespedDao.guardar(huesped);
 	}
-	public void listar() {
-		
+	public List<Huesped> listar() {
+		return huespedDao.listar();
 	}
 	public void modificar() {
 		
