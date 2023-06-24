@@ -32,4 +32,10 @@ public class HuespedController {
 	public void eliminar() {
 		
 	}
+	public List<Huesped> buscarPorApellido(String apellido) {
+		return huespedDao.buscarPorApellido(apellido);
+	}
+	public List<Huesped> buscarPorId(Integer id) {
+		return huespedDao.buscarPorId(id);
+	}
 }

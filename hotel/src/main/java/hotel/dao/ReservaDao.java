@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import hotel.modelo.Huesped;
 import hotel.modelo.Reserva;
 
 public class ReservaDao {
@@ -119,5 +120,33 @@ public class ReservaDao {
 			throw new RuntimeException(e);
 		}
 		
+	}
+	
+	public List<Reserva> buscarPorId(Integer id) {
+		List<Reserva> resultado = new ArrayList<>();
+		
+		try{
+		
+			final PreparedStatement statement = con.prepareStatement("SELECT ID, FECHAENTRADA, FECHASALIDA, VALOR, FORMAPAGO FROM RESERVAS WHERE ID = ?");
+			
+			try(statement){
+				statement.setInt(1, id);
+				statement.execute();
+				
+				final ResultSet resultSet = statement.getResultSet();
+				
+				while(resultSet.next()) {
+					Reserva fila = new Reserva(resultSet.getInt("ID"),
+							resultSet.getDate("FECHAENTRADA"),
+							resultSet.getDate("FECHASALIDA"),
+							resultSet.getInt("VALOR"),
+							resultSet.getString("FORMAPAGO"));
+					resultado.add(fila);
+				}
+				return resultado;
+			}
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

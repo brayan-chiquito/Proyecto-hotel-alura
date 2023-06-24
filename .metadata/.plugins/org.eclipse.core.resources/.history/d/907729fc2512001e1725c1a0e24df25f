@@ -1,0 +1,42 @@
+package hotel.controller;
+
+import java.util.List;
+
+import hotel.dao.HuespedDao;
+import hotel.dao.ReservaDao;
+import hotel.factory.ConnectionFactory;
+import hotel.modelo.Huesped;
+import hotel.modelo.Reserva;
+
+public class HuespedController {
+	private HuespedDao huespedDao;
+	private ReservaDao reservaDao;
+	
+	
+	public HuespedController() {
+		var factory = ConnectionFactory.getInstance();
+		this.reservaDao = new ReservaDao(factory.recuperaConexion());
+		var factory1 = ConnectionFactory.getInstance();
+		this.huespedDao = new HuespedDao(factory1.recuperaConexion());
+	}
+	public void guardar(Huesped huesped, Reserva reserva) {
+		reservaDao.guardar(reserva);
+		huespedDao.guardar(huesped);
+	}
+	public List<Huesped> listar() {
+		return huespedDao.listar();
+	}
+	public void modificar() {
+		
+	}
+	public void eliminar() {
+		
+	}
+	public List<Huesped> buscarPorApellido(String apellido) {
+		return huespedDao.buscarPorApellido(apellido);
+	}
+	public Object buscarPorId(Integer datoBuscar) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

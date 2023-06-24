@@ -96,5 +96,63 @@ public class HuespedDao {
 			throw new RuntimeException(e);
 		}
 	}
+	public List<Huesped> buscarPorApellido(String apellido) {
+		List<Huesped> resultado = new ArrayList<>();
+		
+		try{
+		
+			final PreparedStatement statement = con.prepareStatement("SELECT ID, NOMBRE, APELLIDO, FECHANACIMIENTO, NACIONALIDAD, TELEFONO, IDRESERVA FROM HUESPEDES WHERE APELLIDO = ?");
+			
+			try(statement){
+				statement.setString(1, apellido);
+				statement.execute();
+				
+				final ResultSet resultSet = statement.getResultSet();
+				
+				while(resultSet.next()) {
+					Huesped fila = new Huesped(resultSet.getInt("ID"),
+							resultSet.getString("NOMBRE"),
+							resultSet.getString("APELLIDO"),
+							resultSet.getDate("FECHANACIMIENTO"),
+							resultSet.getString("NACIONALIDAD"),
+							resultSet.getString("TELEFONO"),
+								resultSet.getInt("IDRESERVA"));
+					resultado.add(fila);
+				}
+				return resultado;
+			}
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public List<Huesped> buscarPorId(Integer id) {
+		List<Huesped> resultado = new ArrayList<>();
+		
+		try{
+		
+			final PreparedStatement statement = con.prepareStatement("SELECT ID, NOMBRE, APELLIDO, FECHANACIMIENTO, NACIONALIDAD, TELEFONO, IDRESERVA FROM HUESPEDES WHERE ID = ?");
+			
+			try(statement){
+				statement.setInt(1, id);
+				statement.execute();
+				
+				final ResultSet resultSet = statement.getResultSet();
+				
+				while(resultSet.next()) {
+					Huesped fila = new Huesped(resultSet.getInt("ID"),
+							resultSet.getString("NOMBRE"),
+							resultSet.getString("APELLIDO"),
+							resultSet.getDate("FECHANACIMIENTO"),
+							resultSet.getString("NACIONALIDAD"),
+							resultSet.getString("TELEFONO"),
+								resultSet.getInt("IDRESERVA"));
+					resultado.add(fila);
+				}
+				return resultado;
+			}
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	
 }

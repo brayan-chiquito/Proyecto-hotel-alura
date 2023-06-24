@@ -4,6 +4,7 @@ import java.util.List;
 
 import hotel.dao.ReservaDao;
 import hotel.factory.ConnectionFactory;
+import hotel.modelo.Huesped;
 import hotel.modelo.Reserva;
 
 public class ReservaController {
@@ -29,5 +30,8 @@ public class ReservaController {
 	public int ultimoResgistro() {
 		return reservaDao.ultimoResgistro();
 		
+	}
+	public List<Reserva> buscarPorId(Integer id) {
+		return reservaDao.buscarPorId(id);
 	}
 }
