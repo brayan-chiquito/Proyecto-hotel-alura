@@ -1,12 +1,17 @@
 package hotel.view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Optional;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -220,12 +225,22 @@ public class Busqueda extends JFrame {
 		btnbuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				panel.setSelectedComponent(scroll_tableHuespedes);
-				if(!txtBuscar.getText().isBlank()) {
-					buscar();
-				}else {
-					JOptionPane.showMessageDialog(null, "Debes llenar el dato a buscar");
+				Component componenteSeleccionado = panel.getSelectedComponent();
+
+				if (componenteSeleccionado == scroll_tableHuespedes) {
+					if(!txtBuscar.getText().isBlank()) {
+						buscarEnHuesped();
+					}else {
+						JOptionPane.showMessageDialog(null, "Debes llenar el id o apellido a buscar");
+					}
+				} else if (componenteSeleccionado == scroll_table) {
+					if(!txtBuscar.getText().isBlank()) {
+						buscarEnReserva();
+					}else {
+						JOptionPane.showMessageDialog(null, "Debes llenar el id a buscar");
+					}
 				}
+				
 			}
 		});
 		btnbuscar.setLayout(null);
@@ -242,6 +257,12 @@ public class Busqueda extends JFrame {
 		lblBuscar.setFont(new Font("Roboto", Font.PLAIN, 18));
 		
 		JPanel btnEditar = new JPanel();
+		btnEditar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				modificarReserva();
+			}
+		});
 		btnEditar.setLayout(null);
 		btnEditar.setBackground(new Color(12, 138, 199));
 		btnEditar.setBounds(635, 508, 122, 35);
@@ -256,6 +277,12 @@ public class Busqueda extends JFrame {
 		btnEditar.add(lblEditar);
 		
 		JPanel btnEliminar = new JPanel();
+		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 		btnEliminar.setLayout(null);
 		btnEliminar.setBackground(new Color(12, 138, 199));
 		btnEliminar.setBounds(767, 508, 122, 35);
@@ -279,8 +306,14 @@ public class Busqueda extends JFrame {
 	private void limpiarTablaReservas() {
 		modelo.getDataVector().clear();
 	}
+	private boolean tieneFilaElegidaReservas() {
+		return tbReservas.getSelectedRowCount() == 0 || tbReservas.getSelectedColumnCount() == 0;
+	}
+	private boolean tieneFilaElegidaHuespedes() {
+		return tbHuespedes.getSelectedRowCount() == 0 || tbHuespedes.getSelectedColumnCount() == 0;
+	}
 	
-	public void cargarTablaReservas() {
+	private void cargarTablaReservas() {
 		var reservas = this.reservaController.listar();
 		reservas.forEach(reserva -> modelo.addRow(
 				new Object[] {
@@ -292,7 +325,7 @@ public class Busqueda extends JFrame {
 				}));
 	}
 	
-	public void cargarTablaHespedes() {
+	private void cargarTablaHespedes() {
 		var huespedes = this.huespedController.listar();
 		huespedes.forEach(huesped -> modeloHuesped.addRow(
 				new Object[] {
@@ -306,7 +339,7 @@ public class Busqueda extends JFrame {
 				}));
 	}
 	
-	public void buscar() {
+	private void buscarEnHuesped() {
 		Integer id;
 		try {
 			id = Integer.parseInt(txtBuscar.getText());
@@ -323,17 +356,6 @@ public class Busqueda extends JFrame {
 							huesped.getTelefono(),
 							huesped.getCodigoReserva()
 						}));
-				limpiarTablaReservas();
-				var datosReserva = this.reservaController.buscarPorId(id);
-				datosReserva.forEach(huesped -> modelo.addRow(
-						new Object[] {
-							huesped.getId(),
-							huesped.getFechaEntrada(),
-							huesped.getFechaSalida(),
-							huesped.getValor(),
-							huesped.getFormaPago()
-						}));
-			
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "No se encontraron datos");
@@ -360,6 +382,72 @@ public class Busqueda extends JFrame {
 		}
 			
 	}
+	
+	private void buscarEnReserva() {
+		Integer id;
+		try {
+				id = Integer.parseInt(txtBuscar.getText());
+				var datosHuesped = this.huespedController.buscarPorId(id);
+				if(!datosHuesped.isEmpty()) {
+					limpiarTablaReservas();
+					var datosReserva = this.reservaController.buscarPorId(id);
+					datosReserva.forEach(huesped -> modelo.addRow(
+							new Object[] {
+								huesped.getId(),
+								huesped.getFechaEntrada(),
+								huesped.getFechaSalida(),
+								huesped.getValor(),
+								huesped.getFormaPago()
+							}));
+				}
+				else { 
+					JOptionPane.showMessageDialog(null, "No se encontraron datos");
+				}
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Ingrese un id");
+			}
+			
+	}
+	
+	private void modificarReserva() {
+		if (tieneFilaElegidaReservas()) {
+			JOptionPane.showMessageDialog(this, "Por favor, elije un item");
+			return;
+		}
+		
+		Optional.ofNullable(modelo.getValueAt(tbReservas.getSelectedRow(), tbReservas.getSelectedColumn()))
+		.ifPresentOrElse(fila -> {
+			Integer id = Integer.valueOf(modelo.getValueAt(tbReservas.getSelectedRow(), 0).toString());
+			String fechaEntradaStr = modelo.getValueAt(tbReservas.getSelectedRow(), 1).toString();
+			SimpleDateFormat dateFormat0 = new SimpleDateFormat("yyyy-MM-dd");
+			Date fechaIngreso;
+			try {
+			    fechaIngreso = dateFormat0.parse(fechaEntradaStr);
+			} catch (ParseException e) {
+				JOptionPane.showMessageDialog(this, "formato de fecha Ingreso invalido");
+			    e.printStackTrace();
+			    return;
+			}
+			String fechaSalidaStr = modelo.getValueAt(tbReservas.getSelectedRow(), 2).toString();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date fechaSalida;
+			try {
+			    fechaSalida = dateFormat.parse(fechaSalidaStr);
+			} catch (ParseException e) {
+				JOptionPane.showMessageDialog(this, "formato de fecha Salida invalido");
+			    e.printStackTrace();
+			    return;
+			}
+			Integer valor = Integer.valueOf(modelo.getValueAt(tbReservas.getSelectedRow(), 3).toString());
+			String formaPago = (String) modelo.getValueAt(tbReservas.getSelectedRow(), 4);
+			int cantidadEliminada;
+			cantidadEliminada = this.reservaController.modificar(fechaIngreso, fechaSalida, valor, formaPago, id);
+			
+			JOptionPane.showMessageDialog(this, cantidadEliminada + " item actualizado con éxito!");
+		}, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
+		
+	}
+
 	
 //Código que permite mover la ventana por la pantalla según la posición de "x" y "y"
 	 private void headerMousePressed(java.awt.event.MouseEvent evt) {

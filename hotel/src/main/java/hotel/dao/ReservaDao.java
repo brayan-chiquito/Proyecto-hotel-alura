@@ -149,4 +149,25 @@ public class ReservaDao {
 			throw new RuntimeException(e);
 		}
 	}
+	public int modificar(java.util.Date fechaIngreso, java.util.Date fechaSalida, Integer valor, String formaPago,
+			Integer id) {
+		java.sql.Date fechaInicioSQL = new java.sql.Date(fechaIngreso.getTime());
+		java.sql.Date fechaFinSQL = new java.sql.Date(fechaSalida.getTime());
+		try{
+			final PreparedStatement statement = con.prepareStatement("UPDATE RESERVAS SET FECHAENTRADA =  ?, FECHASALIDA = ?, VALOR = ?, FORMAPAGO = ? WHERE ID = ?");
+			try(statement){
+				statement.setDate(1, fechaInicioSQL);
+				statement.setDate(2, fechaFinSQL);
+				statement.setInt(3, valor);
+				statement.setString(4, formaPago);
+				statement.setInt(5, id);
+
+				statement.execute();
+				int updateCount = statement.getUpdateCount();
+				return updateCount;
+			}
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
