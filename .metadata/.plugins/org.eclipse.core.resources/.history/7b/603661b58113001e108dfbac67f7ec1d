@@ -260,12 +260,7 @@ public class Busqueda extends JFrame {
 		btnEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Component componenteSeleccionado = panel.getSelectedComponent();
-				if (componenteSeleccionado == scroll_tableHuespedes) {
-					modificarHuesped();
-				} else if (componenteSeleccionado == scroll_table) {
-					modificarReserva();
-				}
+				modificarReserva();
 			}
 		});
 		btnEditar.setLayout(null);
@@ -285,16 +280,7 @@ public class Busqueda extends JFrame {
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Component componenteSeleccionado = panel.getSelectedComponent();
-				if (componenteSeleccionado == scroll_tableHuespedes) {
-					eliminarHuesped();
-					limpiarTablaHuesped();
-					cargarTablaHespedes();
-				} else if (componenteSeleccionado == scroll_table) {
-					eliminarReserva();
-					limpiarTablaReservas();
-					cargarTablaReservas();
-				}
+				
 			}
 		});
 		btnEliminar.setLayout(null);
@@ -469,10 +455,10 @@ public class Busqueda extends JFrame {
 		}
 		Optional.ofNullable(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), tbHuespedes.getSelectedColumn()))
 		.ifPresentOrElse(fila -> {
-			Integer id = Integer.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 0).toString());
+			Integer id = Integer.valueOf(modeloHuesped.getValueAt(tbReservas.getSelectedRow(), 0).toString());
 			String nombre = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 1);
 			String apellido = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 2);
-			String fechaNaciminetoStr = modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 3).toString();
+			String fechaNaciminetoStr = modeloHuesped.getValueAt(tbReservas.getSelectedRow(), 3).toString();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date fechaNacimineto;
 			try {
@@ -492,38 +478,7 @@ public class Busqueda extends JFrame {
 		}, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
 		
 	}
-	
-	private void eliminarReserva() {
-		if (tieneFilaElegidaReservas()) {
-			JOptionPane.showMessageDialog(this, "Por favor, elije un item");
-			return;
-		}
-		Optional.ofNullable(modelo.getValueAt(tbReservas.getSelectedRow(), tbReservas.getSelectedColumn()))
-		.ifPresentOrElse(fila -> {
-			Integer id = Integer.valueOf(modelo.getValueAt(tbReservas.getSelectedRow(), 0).toString());
-			var cantidadEliminada = this.reservaController.eliminar(id);
 
-			modelo.removeRow(tbReservas.getSelectedRow());
-
-			JOptionPane.showMessageDialog(this, cantidadEliminada + " item eliminado con éxito!");
-		}, () -> JOptionPane.showMessageDialog(this, "actualizando tabla"));
-	}
-	
-	private void eliminarHuesped() {
-		if (tieneFilaElegidaHuespedes()) {
-			JOptionPane.showMessageDialog(this, "Por favor, elije un item");
-			return;
-		}
-		Optional.ofNullable(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), tbHuespedes.getSelectedColumn()))
-		.ifPresentOrElse(fila -> {
-			Integer id = Integer.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 0).toString());
-			var cantidadEliminada = this.huespedController.eliminar(id);
-
-			modeloHuesped.removeRow(tbHuespedes.getSelectedRow());
-
-			JOptionPane.showMessageDialog(this, cantidadEliminada + " item eliminado con éxito!");
-		}, () -> JOptionPane.showMessageDialog(this, "actualizando tabla"));
-	}
 	
 //Código que permite mover la ventana por la pantalla según la posición de "x" y "y"
 	 private void headerMousePressed(java.awt.event.MouseEvent evt) {

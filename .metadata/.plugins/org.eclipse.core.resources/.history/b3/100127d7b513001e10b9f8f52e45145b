@@ -30,8 +30,8 @@ public class HuespedController {
 	public void modificar() {
 		
 	}
-	public int eliminar(Integer id) {
-		return huespedDao.eliminar(id);
+	public void eliminar() {
+		
 	}
 	public List<Huesped> buscarPorApellido(String apellido) {
 		return huespedDao.buscarPorApellido(apellido);

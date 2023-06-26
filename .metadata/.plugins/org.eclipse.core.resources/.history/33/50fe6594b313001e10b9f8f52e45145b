@@ -285,16 +285,7 @@ public class Busqueda extends JFrame {
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Component componenteSeleccionado = panel.getSelectedComponent();
-				if (componenteSeleccionado == scroll_tableHuespedes) {
-					eliminarHuesped();
-					limpiarTablaHuesped();
-					cargarTablaHespedes();
-				} else if (componenteSeleccionado == scroll_table) {
-					eliminarReserva();
-					limpiarTablaReservas();
-					cargarTablaReservas();
-				}
+				
 			}
 		});
 		btnEliminar.setLayout(null);
@@ -506,24 +497,9 @@ public class Busqueda extends JFrame {
 			modelo.removeRow(tbReservas.getSelectedRow());
 
 			JOptionPane.showMessageDialog(this, cantidadEliminada + " item eliminado con éxito!");
-		}, () -> JOptionPane.showMessageDialog(this, "actualizando tabla"));
+		}, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
 	}
-	
-	private void eliminarHuesped() {
-		if (tieneFilaElegidaHuespedes()) {
-			JOptionPane.showMessageDialog(this, "Por favor, elije un item");
-			return;
-		}
-		Optional.ofNullable(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), tbHuespedes.getSelectedColumn()))
-		.ifPresentOrElse(fila -> {
-			Integer id = Integer.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 0).toString());
-			var cantidadEliminada = this.huespedController.eliminar(id);
 
-			modeloHuesped.removeRow(tbHuespedes.getSelectedRow());
-
-			JOptionPane.showMessageDialog(this, cantidadEliminada + " item eliminado con éxito!");
-		}, () -> JOptionPane.showMessageDialog(this, "actualizando tabla"));
-	}
 	
 //Código que permite mover la ventana por la pantalla según la posición de "x" y "y"
 	 private void headerMousePressed(java.awt.event.MouseEvent evt) {

@@ -285,6 +285,9 @@ public class Busqueda extends JFrame {
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				eliminarReserva();
+				limpiarTablaReservas();
+				cargarTablaReservas();
 				Component componenteSeleccionado = panel.getSelectedComponent();
 				if (componenteSeleccionado == scroll_tableHuespedes) {
 					eliminarHuesped();

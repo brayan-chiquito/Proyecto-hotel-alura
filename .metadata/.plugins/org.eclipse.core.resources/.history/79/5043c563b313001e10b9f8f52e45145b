@@ -25,7 +25,7 @@ public class ReservaController {
 	public int modificar(Date fechaIngreso, Date fechaSalida, Integer valor, String formaPago, Integer id) {
 		return reservaDao.modificar(fechaIngreso,fechaSalida,valor,formaPago,id);
 	}
-	public int eliminar(Integer id) {
+	public void eliminar(Integer id) {
 		return reservaDao.eliminar(id);
 	}
 	public int ultimoResgistro() {

@@ -1,6 +1,5 @@
 package hotel.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import hotel.dao.HuespedDao;
@@ -30,16 +29,13 @@ public class HuespedController {
 	public void modificar() {
 		
 	}
-	public int eliminar(Integer id) {
-		return huespedDao.eliminar(id);
+	public void eliminar() {
+		
 	}
 	public List<Huesped> buscarPorApellido(String apellido) {
 		return huespedDao.buscarPorApellido(apellido);
 	}
 	public List<Huesped> buscarPorId(Integer id) {
 		return huespedDao.buscarPorId(id);
-	}
-	public int modificar(String nombre, String apellido, Date fechaNacimineto, String nacionalidad, String telefono, Integer id) {
-		return huespedDao.modificar(nombre,apellido,fechaNacimineto,nacionalidad,telefono,id);
 	}
 }
