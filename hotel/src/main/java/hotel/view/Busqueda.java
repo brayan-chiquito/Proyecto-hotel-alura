@@ -329,28 +329,36 @@ public class Busqueda extends JFrame {
 	
 	private void cargarTablaReservas() {
 		var reservas = this.reservaController.listar();
-		reservas.forEach(reserva -> modelo.addRow(
-				new Object[] {
-					reserva.getId(),
-					reserva.getFechaEntrada(),
-					reserva.getFechaSalida(),
-					reserva.getValor(),
-					reserva.getFormaPago()
-				}));
+		reservas.forEach(reserva -> {
+			if(reserva.isActivo() == true) {
+				modelo.addRow(
+					new Object[] {
+						reserva.getId(),
+						reserva.getFechaEntrada(),
+						reserva.getFechaSalida(),
+						reserva.getValor(),
+						reserva.getFormaPago()
+					});
+			}
+		});
 	}
 	
 	private void cargarTablaHespedes() {
 		var huespedes = this.huespedController.listar();
-		huespedes.forEach(huesped -> modeloHuesped.addRow(
-				new Object[] {
-					huesped.getId(),
-					huesped.getNombre(),
-					huesped.getApellido(),
-					huesped.getFechaNacimiento(),
-					huesped.getNacionalidad(),
-					huesped.getTelefono(),
-					huesped.getCodigoReserva()
-				}));
+		huespedes.forEach(huesped -> {
+			if(huesped.isActivo() == true) {
+				modeloHuesped.addRow(
+						new Object[] {
+							huesped.getId(),
+							huesped.getNombre(),
+							huesped.getApellido(),
+							huesped.getFechaNacimiento(),
+							huesped.getNacionalidad(),
+							huesped.getTelefono(),
+							huesped.getCodigoReserva()
+						});
+			}
+		});
 	}
 	
 	private void buscarEnHuesped() {
@@ -401,10 +409,9 @@ public class Busqueda extends JFrame {
 		Integer id;
 		try {
 				id = Integer.parseInt(txtBuscar.getText());
-				var datosHuesped = this.huespedController.buscarPorId(id);
-				if(!datosHuesped.isEmpty()) {
+				var datosReserva = this.reservaController.buscarPorId(id);
+				if(!datosReserva.isEmpty()) {
 					limpiarTablaReservas();
-					var datosReserva = this.reservaController.buscarPorId(id);
 					datosReserva.forEach(huesped -> modelo.addRow(
 							new Object[] {
 								huesped.getId(),

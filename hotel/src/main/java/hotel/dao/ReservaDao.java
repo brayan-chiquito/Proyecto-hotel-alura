@@ -99,7 +99,7 @@ public class ReservaDao {
 		
 		try{
 		
-			final PreparedStatement statement = con.prepareStatement("SELECT ID, FECHAENTRADA, FECHASALIDA, VALOR, FORMAPAGO FROM RESERVAS");
+			final PreparedStatement statement = con.prepareStatement("SELECT ID, FECHAENTRADA, FECHASALIDA, VALOR, FORMAPAGO, ACTIVO FROM RESERVAS");
 			
 			try(statement){
 				statement.execute();
@@ -111,7 +111,8 @@ public class ReservaDao {
 							resultSet.getDate("FECHAENTRADA"),
 							resultSet.getDate("FECHASALIDA"),
 							resultSet.getInt("VALOR"),
-							resultSet.getString("FORMAPAGO"));
+							resultSet.getString("FORMAPAGO"),
+							resultSet.getBoolean("ACTIVO"));
 					resultado.add(fila);
 				}
 				return resultado;
@@ -127,7 +128,7 @@ public class ReservaDao {
 		
 		try{
 		
-			final PreparedStatement statement = con.prepareStatement("SELECT ID, FECHAENTRADA, FECHASALIDA, VALOR, FORMAPAGO FROM RESERVAS WHERE ID = ?");
+			final PreparedStatement statement = con.prepareStatement("SELECT ID, FECHAENTRADA, FECHASALIDA, VALOR, FORMAPAGO FROM RESERVAS WHERE ID = ? AND ACTIVO = 1");
 			
 			try(statement){
 				statement.setInt(1, id);
@@ -172,7 +173,7 @@ public class ReservaDao {
 	}
 	public int eliminar(Integer id) {
 		try{
-			final PreparedStatement statement = con.prepareStatement("DELETE FROM RESERVAS WHERE ID = ?");
+			final PreparedStatement statement = con.prepareStatement("UPDATE RESERVAS SET ACTIVO = 0 WHERE ID = ?");
 			try(statement){
 				statement.setInt(1, id);
 				statement.execute();

@@ -10,6 +10,7 @@ public class Huesped {
 	private String nacionalidad;
 	private String telefono;
 	private Integer codigoReserva;
+	private boolean activo;
 	
 
 	public Huesped(String nombre, String apellido, Date fechaNacimiento, String nacionalidad, String telefono, Integer codigoReserva) {
@@ -19,6 +20,18 @@ public class Huesped {
 		this.nacionalidad = nacionalidad;
 		this.telefono = telefono;
 		this.codigoReserva = codigoReserva;
+	}
+	
+	public Huesped(Integer id, String nombre, String apellido, Date fechaNacimiento, String nacionalidad,
+			String telefono, Integer codigoReserva, boolean activo) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.fechaNacimiento = fechaNacimiento;
+		this.nacionalidad = nacionalidad;
+		this.telefono = telefono;
+		this.codigoReserva = codigoReserva;
+		this.activo = activo;
 	}
 	
 	public Huesped(Integer id, String nombre, String apellido, Date fechaNacimiento, String nacionalidad,
@@ -76,5 +89,12 @@ public class Huesped {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public boolean isActivo() {
+		return activo;
+	}
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+	
 	
 }

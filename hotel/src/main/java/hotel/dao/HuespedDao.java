@@ -73,7 +73,7 @@ public class HuespedDao {
 		
 		try{
 		
-			final PreparedStatement statement = con.prepareStatement("SELECT ID, NOMBRE, APELLIDO, FECHANACIMIENTO, NACIONALIDAD, TELEFONO, IDRESERVA FROM HUESPEDES");
+			final PreparedStatement statement = con.prepareStatement("SELECT ID, NOMBRE, APELLIDO, FECHANACIMIENTO, NACIONALIDAD, TELEFONO, IDRESERVA, ACTIVO FROM HUESPEDES");
 			
 			try(statement){
 				statement.execute();
@@ -87,7 +87,8 @@ public class HuespedDao {
 							resultSet.getDate("FECHANACIMIENTO"),
 							resultSet.getString("NACIONALIDAD"),
 							resultSet.getString("TELEFONO"),
-								resultSet.getInt("IDRESERVA"));
+							resultSet.getInt("IDRESERVA"),
+							resultSet.getBoolean("ACTIVO"));
 					resultado.add(fila);
 				}
 				return resultado;
@@ -101,7 +102,7 @@ public class HuespedDao {
 		
 		try{
 		
-			final PreparedStatement statement = con.prepareStatement("SELECT ID, NOMBRE, APELLIDO, FECHANACIMIENTO, NACIONALIDAD, TELEFONO, IDRESERVA FROM HUESPEDES WHERE APELLIDO = ?");
+			final PreparedStatement statement = con.prepareStatement("SELECT ID, NOMBRE, APELLIDO, FECHANACIMIENTO, NACIONALIDAD, TELEFONO, IDRESERVA FROM HUESPEDES WHERE APELLIDO = ? AND ACTIVO = 1");
 			
 			try(statement){
 				statement.setString(1, apellido);
@@ -130,7 +131,7 @@ public class HuespedDao {
 		
 		try{
 		
-			final PreparedStatement statement = con.prepareStatement("SELECT ID, NOMBRE, APELLIDO, FECHANACIMIENTO, NACIONALIDAD, TELEFONO, IDRESERVA FROM HUESPEDES WHERE ID = ?");
+			final PreparedStatement statement = con.prepareStatement("SELECT ID, NOMBRE, APELLIDO, FECHANACIMIENTO, NACIONALIDAD, TELEFONO, IDRESERVA FROM HUESPEDES WHERE ID = ? AND ACTIVO = 1");
 			
 			try(statement){
 				statement.setInt(1, id);
@@ -177,7 +178,7 @@ public class HuespedDao {
 	}
 	public int eliminar(Integer id) {
 		try{
-			final PreparedStatement statement = con.prepareStatement("DELETE FROM HUESPEDES WHERE ID = ?");
+			final PreparedStatement statement = con.prepareStatement("UPDATE HUESPEDES SET ACTIVO = 0 WHERE ID = ?");
 			try(statement){
 				statement.setInt(1, id);
 				statement.execute();

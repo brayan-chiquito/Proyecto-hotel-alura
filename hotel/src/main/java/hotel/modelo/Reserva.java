@@ -8,6 +8,7 @@ public class Reserva {
 	private Date fechaSalida;
 	private Integer valor;
 	private String formaPago;
+	private boolean activo;
 	
 	public Reserva(Date fechaEntrada, Date fechaSalida, Integer valor, String formaPago) {
 		this.fechaEntrada = fechaEntrada;
@@ -22,6 +23,15 @@ public class Reserva {
 		this.fechaSalida = fechaSalida;
 		this.valor = valor;
 		this.formaPago = formaPago;
+	}
+	
+	public Reserva(Integer id, Date fechaEntrada, Date fechaSalida, Integer valor, String formaPago, boolean activo) {
+		this.id = id;
+		this.fechaEntrada = fechaEntrada;
+		this.fechaSalida = fechaSalida;
+		this.valor = valor;
+		this.formaPago = formaPago;
+		this.activo = activo;
 	}
 
 	public Date getFechaEntrada() {
@@ -55,5 +65,12 @@ public class Reserva {
 	public Integer getId() {
 		return id;
 	}
+	public boolean isActivo() {
+		return activo;
+	}
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+	
 	
 }
