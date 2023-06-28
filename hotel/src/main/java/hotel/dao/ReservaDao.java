@@ -1,32 +1,24 @@
 package hotel.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import hotel.modelo.Huesped;
 import hotel.modelo.Reserva;
 
 public class ReservaDao {
 	private Connection con;
-
+	private Timer temporizador;
+	
 	public ReservaDao(Connection con) {
 		this.con = con;
 	}
-	private void cerrarConexion() {
-        if (con != null) {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                // Manejar la excepción de cierre de conexión si es necesario
-            }
-        }
-    }
 	
 	public void guardar(Reserva reserva) {
 		try {

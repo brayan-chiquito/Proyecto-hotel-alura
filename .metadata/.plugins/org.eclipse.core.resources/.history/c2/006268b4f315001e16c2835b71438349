@@ -1,0 +1,52 @@
+package hotel.controller;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+
+import hotel.dao.ReservaDao;
+import hotel.factory.ConnectionFactory;
+import hotel.modelo.Reserva;
+
+public class ReservaController {
+	private ReservaDao reservaDao;
+	private Connection connection;
+	
+	
+	public ReservaController() throws SQLException {
+		var factory = ConnectionFactory.getInstance();
+        connection = factory.getConnection();
+        this.reservaDao = new ReservaDao(connection);
+	}
+	public void guardar(Reserva reserva) {
+		reservaDao.guardar(reserva);
+	}
+	public List<Reserva> listar() {
+		var lista = reservaDao.listar();
+		closeConnection();
+		return lista;
+	}
+	public int modificar(Date fechaIngreso, Date fechaSalida, Integer valor, String formaPago, Integer id) {
+		return reservaDao.modificar(fechaIngreso,fechaSalida,valor,formaPago,id);
+	}
+	public int eliminar(Integer id) {
+		return reservaDao.eliminar(id);
+	}
+	public int ultimoResgistro() {
+		return reservaDao.ultimoResgistro();
+		
+	}
+	public List<Reserva> buscarPorId(Integer id) {
+		return reservaDao.buscarPorId(id);
+	}
+	public void closeConnection() {
+		if (connection != null) {
+            try {
+                ConnectionFactory.getInstance().putConnectionToSleep(connection);
+            } catch (SQLException e) {
+                // Manejar la excepción de devolución de la conexión al pool si es necesario
+            }
+        }
+    }
+}

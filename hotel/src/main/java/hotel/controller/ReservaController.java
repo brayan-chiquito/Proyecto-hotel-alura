@@ -1,20 +1,27 @@
 package hotel.controller;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
 import hotel.dao.ReservaDao;
 import hotel.factory.ConnectionFactory;
-import hotel.modelo.Huesped;
 import hotel.modelo.Reserva;
 
 public class ReservaController {
 	private ReservaDao reservaDao;
-	
+	private Connection connection;
 	
 	public ReservaController() {
 		var factory = ConnectionFactory.getInstance();
-		this.reservaDao = new ReservaDao(factory.recuperaConexion());
+        try {
+			connection = factory.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        this.reservaDao = new ReservaDao(connection);
 	}
 	public void guardar(Reserva reserva) {
 		reservaDao.guardar(reserva);
@@ -35,4 +42,5 @@ public class ReservaController {
 	public List<Reserva> buscarPorId(Integer id) {
 		return reservaDao.buscarPorId(id);
 	}
+	
 }

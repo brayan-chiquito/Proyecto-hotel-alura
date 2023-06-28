@@ -32,10 +32,11 @@ CREATE TABLE `huespedes` (
   `nacionalidad` varchar(45) NOT NULL,
   `telefono` varchar(45) DEFAULT NULL,
   `idReserva` int NOT NULL,
+  `activo` tinyint DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `fk_idReserva` (`idReserva`),
   CONSTRAINT `fk_idReserva` FOREIGN KEY (`idReserva`) REFERENCES `reservas` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +45,7 @@ CREATE TABLE `huespedes` (
 
 LOCK TABLES `huespedes` WRITE;
 /*!40000 ALTER TABLE `huespedes` DISABLE KEYS */;
+INSERT INTO `huespedes` VALUES (1,'brayan','chiquito','1997-01-20','colombiano-colombiana','123456789',1,1),(2,'peppa','pig','2023-06-25','árabe-árabe','789456',2,1);
 /*!40000 ALTER TABLE `huespedes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,8 +62,9 @@ CREATE TABLE `reservas` (
   `fechaSalida` date NOT NULL,
   `valor` int NOT NULL,
   `formaPago` varchar(100) NOT NULL,
+  `activo` tinyint DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +73,7 @@ CREATE TABLE `reservas` (
 
 LOCK TABLES `reservas` WRITE;
 /*!40000 ALTER TABLE `reservas` DISABLE KEYS */;
+INSERT INTO `reservas` VALUES (1,'2023-06-18','2023-06-23',200000,'Dinero en efectivo',1),(2,'2023-06-28','2023-06-30',80000,'Tarjeta de Débito',1);
 /*!40000 ALTER TABLE `reservas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,4 +109,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-17 21:19:17
+-- Dump completed on 2023-06-28 16:50:47

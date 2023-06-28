@@ -1,0 +1,191 @@
+package hotel.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import hotel.modelo.Reserva;
+
+public class ReservaDao {
+	private Connection con;
+	private Timer temporizador;
+	
+	public ReservaDao(Connection con) {
+		this.con = con;
+	}
+	
+	public void guardar(Reserva reserva) {
+		try {
+			con.setAutoCommit(false);
+			PreparedStatement statement = con.prepareStatement("INSERT INTO RESERVAS (fechaEntrada, fechaSalida, valor, formaPago)"
+			+ "VALUE (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+			
+			try(statement) {
+				ejecutarRejistro(reserva, statement);
+				con.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("ROLLBACK de la transaccion");
+				con.rollback();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void ejecutarRejistro(Reserva reserva, PreparedStatement statement) throws SQLException {
+		java.util.Date fechaEntrada = reserva.getFechaEntrada();
+		java.util.Date fechaSalida = reserva.getFechaSalida();
+		java.sql.Date fechaSqlEntrada = new java.sql.Date(fechaEntrada.getTime());
+		java.sql.Date fechaSqlSalida = new java.sql.Date(fechaSalida.getTime());
+		
+		statement.setDate(1, fechaSqlEntrada);
+		statement.setDate(2, fechaSqlSalida);
+		statement.setInt(3, reserva.getValor());
+		statement.setString(4, reserva.getFormaPago());
+		statement.execute();
+		final ResultSet resultSet = statement.getGeneratedKeys();
+    	try(resultSet){
+	    	while(resultSet.next()) {
+	    		reserva.setId(resultSet.getInt(1));
+	    		System.out.println(String.format("Fue insertado el producto %s", reserva));
+	    	}
+    	}
+	}
+	
+	public int ultimoResgistro() {
+		Integer resultado;
+		try {
+			var querySelect = "SELECT * FROM RESERVAS ORDER BY ID DESC LIMIT 1";
+			System.out.println(querySelect);
+			final PreparedStatement statement = con.prepareStatement(
+					querySelect);
+			try(statement){
+				final ResultSet resultSet = statement.executeQuery();
+				try(resultSet){
+					
+					if (resultSet.next()) {
+						resultado = resultSet.getInt("ID");
+				        
+				    } else {
+				        resultado = 0;
+				    }
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return resultado;
+	}
+	public List<Reserva> listar() {
+		List<Reserva> resultado = new ArrayList<>();
+		
+		try{
+		
+			final PreparedStatement statement = con.prepareStatement("SELECT ID, FECHAENTRADA, FECHASALIDA, VALOR, FORMAPAGO, ACTIVO FROM RESERVAS");
+			
+			try(statement){
+				statement.execute();
+				
+				final ResultSet resultSet = statement.getResultSet();
+				
+				while(resultSet.next()) {
+					Reserva fila = new Reserva(resultSet.getInt("ID"),
+							resultSet.getDate("FECHAENTRADA"),
+							resultSet.getDate("FECHASALIDA"),
+							resultSet.getInt("VALOR"),
+							resultSet.getString("FORMAPAGO"),
+							resultSet.getBoolean("ACTIVO"));
+					resultado.add(fila);
+				}
+				temporizador = new Timer();
+
+		        TimerTask tarea = new TimerTask() {
+		            @Override
+		            public void run() {
+		                System.out.println("Tarea ejecutada después de 5 segundos");
+		                // Aquí puedes continuar con la ejecución de tu código
+		            }
+		        };
+
+		        // Programar la tarea para que se ejecute después de 5 segundos
+		        temporizador.schedule(tarea, 10000);
+				return resultado;
+			}
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
+	
+	public List<Reserva> buscarPorId(Integer id) {
+		List<Reserva> resultado = new ArrayList<>();
+		
+		try{
+		
+			final PreparedStatement statement = con.prepareStatement("SELECT ID, FECHAENTRADA, FECHASALIDA, VALOR, FORMAPAGO FROM RESERVAS WHERE ID = ? AND ACTIVO = 1");
+			
+			try(statement){
+				statement.setInt(1, id);
+				statement.execute();
+				
+				final ResultSet resultSet = statement.getResultSet();
+				
+				while(resultSet.next()) {
+					Reserva fila = new Reserva(resultSet.getInt("ID"),
+							resultSet.getDate("FECHAENTRADA"),
+							resultSet.getDate("FECHASALIDA"),
+							resultSet.getInt("VALOR"),
+							resultSet.getString("FORMAPAGO"));
+					resultado.add(fila);
+				}
+				return resultado;
+			}
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public int modificar(java.util.Date fechaIngreso, java.util.Date fechaSalida, Integer valor, String formaPago,
+			Integer id) {
+		java.sql.Date fechaInicioSQL = new java.sql.Date(fechaIngreso.getTime());
+		java.sql.Date fechaFinSQL = new java.sql.Date(fechaSalida.getTime());
+		try{
+			final PreparedStatement statement = con.prepareStatement("UPDATE RESERVAS SET FECHAENTRADA =  ?, FECHASALIDA = ?, VALOR = ?, FORMAPAGO = ? WHERE ID = ?");
+			try(statement){
+				statement.setDate(1, fechaInicioSQL);
+				statement.setDate(2, fechaFinSQL);
+				statement.setInt(3, valor);
+				statement.setString(4, formaPago);
+				statement.setInt(5, id);
+
+				statement.execute();
+				int updateCount = statement.getUpdateCount();
+				return updateCount;
+			}
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public int eliminar(Integer id) {
+		try{
+			final PreparedStatement statement = con.prepareStatement("UPDATE RESERVAS SET ACTIVO = 0 WHERE ID = ?");
+			try(statement){
+				statement.setInt(1, id);
+				statement.execute();
+				int updateCount = statement.getUpdateCount();
+				return updateCount;
+			}
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+}
