@@ -32,3 +32,31 @@ Por detrás de la cortina debemos verificar si los datos ingresados son correcto
 <p align="center">
   <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/902c5b11-03aa-46c6-880f-8015203ebbb3">
 <p>
+<h3>Menu de usuario</h3>
+En esta ventana se presentarán las opciones cuando el usuario autenticado está dentro del sistema, tienes las siguientes opciones:
+<ul>
+  <li>Reservar: Deve llevar a la ventana de Reservas</li>
+  <li>Búsqueda: Deve llevar a la ventana de Sistema de búsqueda.</li>
+  <li>Salir del Sistema: Deve llevar a la ventana de Login</li>
+</ul>
+<p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/3951cc98-f5f4-48f8-8886-0c703e7d704a">
+<p>
+<h3>Reservas</h3>
+La ventana de Reservas debe permitir al usuário registrar los siguientes datos:
+<ul>
+  <li>Día de Entrada</li>
+  <li>Día de Salida</li>
+  <li>Valor de la reserva, que será calculado en base a un valor de diaria fijo que tú mismo podrás elegir.
+  Forma de Pago donde el usuário podrá elegir entre:</li>
+    <ul>
+      <li>Tarjeta de crédito</li>
+      <li>Tarjeta de débito</li>
+      <li>Dinero en efectivo</li>
+    </ul>
+  <li>Botón continuar</li>
+</ul>
+<p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/f7c888f8-fc1e-4bf9-ac62-1870c182c560">
+<p>
+<h3>Huespedes</h3>
