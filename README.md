@@ -47,8 +47,8 @@ La ventana de Reservas debe permitir al usuário registrar los siguientes datos:
 <ul>
   <li>Día de Entrada</li>
   <li>Día de Salida</li>
-  <li>Valor de la reserva, que será calculado en base a un valor de diaria fijo que tú mismo podrás elegir.
-  Forma de Pago donde el usuário podrá elegir entre:</li>
+  <li>Valor de la reserva, que será calculado en base a un valor de diaria fijo, en este caso 40.000COP.</li>
+  <li>Forma de Pago donde el usuário podrá elegir entre:</li>
     <ul>
       <li>Tarjeta de crédito</li>
       <li>Tarjeta de débito</li>
@@ -60,3 +60,19 @@ La ventana de Reservas debe permitir al usuário registrar los siguientes datos:
   <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/f7c888f8-fc1e-4bf9-ac62-1870c182c560">
 <p>
 <h3>Huespedes</h3>
+Esta sección tendrá los datos personales de los huéspedes con los siguientes campos:
+<ul>
+  <li>Nombre</li>
+  <li>Apellido</li>
+  <li>Fecha de Nacimiento</li>
+  <li>Nacionalidad</li>
+  <li>Teléfono</li>
+  <li>Número de reserva que fue generada anteriormente.</li>
+</ul>
+<p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/a95efe84-5f6c-4be1-9092-b56e47730110">
+<p>
+Se notifica al usuário tanto para registro satisfactorio de los datos como si ocurrió algún error.
+<p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/d2a09c3e-4674-4ad6-8eb2-4a2ac906bbe0">
+<p>
