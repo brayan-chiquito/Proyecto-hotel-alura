@@ -94,3 +94,20 @@ Estos datos son presentado a través de dos tablas, al seleccionar cualquier reg
 <p align="center">
   <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/128172ea-d9c9-44fd-a321-c0512da89cba">
 <p>
+<h4>Busqueda en Reservas y respuestas en caso de no encontrar datos o ingresra dato erroneo</h4>
+<p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/c0e52be0-717f-4856-936f-d2cab745d614">
+<p>
+  <p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/d0dfa5d8-2f99-4d41-9120-f75995134c38">
+<p>
+<p>
+  <p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/d0c1ac10-bc36-4e23-8969-ca3fa7a32f0c)">
+<p>
+  <p>
+  <p align="center">
+  <img src = "">
+<p>
+<h3>Modificar</h3>
+<p>Si el usuario necesita hacer la edición de alguna información, al hacer click en el registro que se desea modificar y en el icono de editar debe conseguir editar los datos y una vez hecha la modificación el usuario deverá ser notificado de que los cambios fueron guardados o si hubo algún error.</p>
