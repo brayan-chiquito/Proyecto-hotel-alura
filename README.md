@@ -94,7 +94,7 @@ Estos datos son presentado a través de dos tablas, al seleccionar cualquier reg
 <p align="center">
   <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/128172ea-d9c9-44fd-a321-c0512da89cba">
 <p>
-<h4>Busqueda en Reservas y respuestas en caso de no encontrar datos o ingresra dato erroneo</h4>
+<h4>Busqueda en Reservas y respuestas en caso de no encontrar datos o ingresar dato erroneo</h4>
 <p align="center">
   <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/c0e52be0-717f-4856-936f-d2cab745d614">
 <p>
@@ -105,9 +105,22 @@ Estos datos son presentado a través de dos tablas, al seleccionar cualquier reg
   <p align="center">
   <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/d0c1ac10-bc36-4e23-8969-ca3fa7a32f0c)">
 <p>
+<h4>Busqueda en huespedes y respuestas en caso de no encontrar datos o ingresar dato erroneo</h4>
+<p>
+  <p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/4f13892d-9968-4543-8bff-7b7bd4cd5366">
+<p>
+<p>
+  <p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/4b31b389-efa1-417a-b4cd-81837c2adbf8">
+<p>
+<p>
+  <p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/5f2a87a4-d414-4a95-8ad2-7b537a5705ae">
+<p>
   <p>
   <p align="center">
-  <img src = "">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/94eb6265-397a-447b-8528-b55116eca888">
 <p>
 <h3>Modificar</h3>
 <p>Si el usuario necesita hacer la edición de alguna información, al hacer click en el registro que se desea modificar y en el icono de editar debe conseguir editar los datos y una vez hecha la modificación el usuario deverá ser notificado de que los cambios fueron guardados o si hubo algún error.</p>
