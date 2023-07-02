@@ -76,3 +76,21 @@ Se notifica al usuário tanto para registro satisfactorio de los datos como si o
 <p align="center">
   <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/d2a09c3e-4674-4ad6-8eb2-4a2ac906bbe0">
 <p>
+<h3>Busqueda</h3>
+Esta sección permite al usuario buscar las informaciones que están dentro de nuestra base de datos.
+Existe un criterio de busqueda para reservas:
+<ul>
+  <li>Número de Reserva</li>
+</ul>
+Y existen dos criterios de busqueda para huespedes:
+<ul>
+  <li>Apellido</li>
+  <li>Número de Reserva</li>
+</ul>
+Estos datos son presentado a través de dos tablas, al seleccionar cualquier registro el usuario podrá, editar o eliminar dicho registro.
+<p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/038e6fd0-80db-4217-b149-f47e340917a3">
+<p>
+<p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/128172ea-d9c9-44fd-a321-c0512da89cba">
+<p>
