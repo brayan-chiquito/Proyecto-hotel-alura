@@ -118,9 +118,30 @@ Estos datos son presentado a través de dos tablas, al seleccionar cualquier reg
   <p align="center">
   <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/5f2a87a4-d414-4a95-8ad2-7b537a5705ae">
 <p>
-  <p>
+<p>
   <p align="center">
   <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/94eb6265-397a-447b-8528-b55116eca888">
 <p>
-<h3>Modificar</h3>
+<h3>Modificar reserva</h3>
 <p>Si el usuario necesita hacer la edición de alguna información, al hacer click en el registro que se desea modificar y en el icono de editar debe conseguir editar los datos y una vez hecha la modificación el usuario deverá ser notificado de que los cambios fueron guardados o si hubo algún error.</p>
+<p>
+  <p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/fbe32e4d-af99-4d6d-8bce-ad73f31c2da0">
+<p>
+<h3>Modificar huesped</h3>
+<p>Si el usuario necesita hacer la edición de alguna información, al hacer click en el registro que se desea modificar y en el icono de editar debe conseguir editar los datos y una vez hecha la modificación el usuario deverá ser notificado de que los cambios fueron guardados o si hubo algún error.</p>
+<p>
+  <p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/441b4c32-7ab9-4a73-a707-9a24ebadd7ae">
+<p>
+<h3>MEliminar reserva</h3> 
+<p>Si el usuario necesita eliminar algún registro, al hacer click en el registro que se desea eliminar y en el icono de eliminar debe conseguir eliminar los datos y una vez hecha la eliminación el usuario deverá ser notificado de que los cambios fueron hechos o si hubo algún error, además de actualizar los datos de la tabla y mostrarlo en pantalla <b>(No se hace la eliminacion total de la base de datos, solo se pone en inactivo)</b></p>
+<p>
+  <p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/3fb50918-3917-43be-96fc-7caff68dbb4c">
+<p>
+<p>Si el usuario necesita eliminar algún registro, al hacer click en el registro que se desea eliminar y en el icono de eliminar debe conseguir eliminar los datos y una vez hecha la eliminación el usuario deverá ser notificado de que los cambios fueron hechos o si hubo algún error, además de actualizar los datos de la tabla y mostrarlo en pantalla <b>(No se hace la eliminacion total de la base de datos, solo se pone en inactivo)</b></p>
+<p>
+  <p align="center">
+  <img src = "https://github.com/brayan-chiquito/Proyecto-hotel-alura/assets/54116336/cab76273-c3f0-4576-ab2b-7147faf127af">
+<p>
